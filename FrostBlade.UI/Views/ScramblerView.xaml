@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="FrostBlade.UI.Views.ScramblerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="40" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="18" />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" FontSize="16" Text="{Binding Current}" /> <!-- TODO: Make the text here and for the last scramble selectable -->
+        
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBlock FontSize="10" Foreground="Gray" Text="{Binding Last}" Margin="8,0,0,0" />
+        </StackPanel>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock VerticalAlignment="Center">Scramble length:</TextBlock>
+                <Rectangle Width="11" />
+                <TextBlock Width="60" VerticalAlignment="Center" Text="{Binding Length}" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <Button Width="100" Command="{Binding ScrambleCommand}">
+                    <TextBlock>New Scramble</TextBlock>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

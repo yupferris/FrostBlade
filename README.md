@@ -1,0 +1,1 @@
+This is a basic Rubik's Cube trainer.

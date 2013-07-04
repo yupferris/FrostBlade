@@ -1,0 +1,36 @@
+﻿<Window x:Class="FrostBlade.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:fb="clr-namespace:FrostBlade;assembly=FrostBlade"
+        xmlns:fbui="clr-namespace:FrostBlade.UI"
+        xmlns:views="clr-namespace:FrostBlade.UI.Views"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="FrostBlade" Height="450" Width="1000" PreviewKeyDown="previewKeyDown" Icon="Resources/icon.png">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ExpressionDark.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <ObjectDataProvider x:Key="_scrambler" ObjectType="fb:Scrambler">
+                <ObjectDataProvider.ConstructorParameters>
+                    <sys:Int32>25</sys:Int32>
+                </ObjectDataProvider.ConstructorParameters>
+            </ObjectDataProvider>
+        
+            <ObjectDataProvider x:Key="_history" ObjectType="fb:History" />
+
+            <ObjectDataProvider x:Key="_timer" ObjectType="fb:Timer" />
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <TabControl>
+        <TabItem Header="Standard Solving">
+            <fbui:StandardSolving x:Name="_standardSolving" />
+        </TabItem>
+        
+        <TabItem Header="Algorithms">
+            <fbui:AlgorithmIndex x:Name="_algorithmIndex" />
+        </TabItem>
+    </TabControl>
+</Window>
