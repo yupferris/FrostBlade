@@ -53,5 +53,59 @@ namespace FrostBlade
             var values = Enum.GetValues(typeof(Moves));
             return (Moves)values.GetValue(random.Next(values.Length));
         }
+
+        public static bool IsOnUFace(Moves m)
+        {
+            return m.ToString().First() == 'U';
+        }
+
+        public static bool IsOnDFace(Moves m)
+        {
+            return m.ToString().First() == 'D';
+        }
+
+        public static bool IsOnLFace(Moves m)
+        {
+            return m.ToString().First() == 'L';
+        }
+
+        public static bool IsOnRFace(Moves m)
+        {
+            return m.ToString().First() == 'R';
+        }
+
+        public static bool IsOnFFace(Moves m)
+        {
+            return m.ToString().First() == 'F';
+        }
+
+        public static bool IsOnBFace(Moves m)
+        {
+            return m.ToString().First() == 'B';
+        }
+
+        public static bool AreOnSameFace(Moves a, Moves b)
+        {
+            return GetNotation(a).First() == GetNotation(b).First();
+        }
+
+        public static bool AreOnOppositeFace(Moves a, Moves b)
+        {
+            if ((IsOnUFace(a) && IsOnDFace(b)) ||
+                (IsOnDFace(a) && IsOnUFace(b)) ||
+                (IsOnLFace(a) && IsOnRFace(b)) ||
+                (IsOnRFace(a) && IsOnLFace(b)) ||
+                (IsOnFFace(a) && IsOnBFace(b)) ||
+                (IsOnBFace(a) && IsOnFFace(b))) return true;
+            return false;
+        }
+
+        public static bool AreAdjacent(Moves a, Moves b)
+        {
+            if (AreOnSameFace(a, b) || AreOnOppositeFace(a, b))
+                return false;
+
+            return true;
+        }
     }
 }

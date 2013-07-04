@@ -72,22 +72,39 @@ namespace FrostBlade
 
         public void Scramble()
         {
-            var scramble = "";
+            var moves = new List<Moves>();
             var random = new Random();
-            Moves? lastMove = null;
             for (int i = 0; i < Length; i++)
             {
                 Moves move;
-                string moveNotation;
+                bool isMoveValid;
                 do
                 {
                     move = MoveHelpers.GetRandom(random);
-                    moveNotation = MoveHelpers.GetNotation(move);
-                } while (lastMove.HasValue && moveNotation.First() == MoveHelpers.GetNotation(lastMove.Value).First());
-                scramble += moveNotation;
-                if (i != Length - 1)
+                    isMoveValid = true;
+                    for (int j = moves.Count - 1; j >= 0; j--)
+                    {
+                        var m = moves[j];
+                        if (MoveHelpers.AreAdjacent(move, m))
+                        {
+                            break;
+                        }
+                        else if (MoveHelpers.AreOnSameFace(move, m))
+                        {
+                            isMoveValid = false;
+                            break;
+                        }
+                    }
+                } while (!isMoveValid);
+                moves.Add(move);
+            }
+
+            var scramble = "";
+            for (int i = 0; i < moves.Count; i++)
+            {
+                scramble += MoveHelpers.GetNotation(moves[i]);
+                if (i != moves.Count - 1)
                     scramble += " ";
-                lastMove = move;
             }
             Current = scramble;
         }
