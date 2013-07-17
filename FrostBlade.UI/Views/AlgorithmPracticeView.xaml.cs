@@ -13,22 +13,20 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FrostBlade.UI
+namespace FrostBlade.UI.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AlgorithmPracticeView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AlgorithmPracticeView : UserControl
     {
-        public MainWindow()
+        public AlgorithmPractice AlgorithmPractice { get; private set; }
+
+        public AlgorithmPracticeView()
         {
             InitializeComponent();
 
-            var database = new Algorithms.Database("Database");
-
-            _standardSolvingView.MainWindow = this;
-            _ollPracticeView.AlgorithmPractice.Database = database;
-            _algorithmIndex.Database = database;
+            DataContextChanged += (sender, e) => AlgorithmPractice = (e.NewValue as ObjectDataProvider).Data as AlgorithmPractice;
         }
     }
 }

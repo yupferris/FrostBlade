@@ -44,7 +44,6 @@ namespace FrostBlade.UI.Views
             InitializeComponent();
 
             DataContextChanged += (sender, e) => StandardSolving = (e.NewValue as ObjectDataProvider).Data as StandardSolving;
-            StandardSolving = DataContext as StandardSolving;
         }
 
         void mainWindowPreviewKeyDown(object sender, KeyEventArgs e)
