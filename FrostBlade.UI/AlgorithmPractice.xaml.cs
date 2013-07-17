@@ -17,9 +17,9 @@ using FrostBlade.Algorithms;
 namespace FrostBlade.UI
 {
     /// <summary>
-    /// Interaction logic for AlgorithmIndex.xaml
+    /// Interaction logic for AlgorithmPractice.xaml
     /// </summary>
-    public partial class AlgorithmIndex : UserControl
+    public partial class AlgorithmPractice : UserControl
     {
         Database _database;
         public Database Database
@@ -41,7 +41,21 @@ namespace FrostBlade.UI
             }
         }
 
-        public AlgorithmIndex()
+        AlgorithmType _filter;
+        public AlgorithmType Filter
+        {
+            get { return _filter; }
+            set
+            {
+                if (value != _filter)
+                {
+                    _filter = value;
+                    // TODO
+                }
+            }
+        }
+
+        public AlgorithmPractice()
         {
             InitializeComponent();
         }
@@ -53,12 +67,7 @@ namespace FrostBlade.UI
 
         void reflectDatabaseAlgorithms()
         {
-            _ollChildrenContainer.Children.Clear();
-            foreach (var algorithm in Database.Algorithms.Where(p => p.Type == AlgorithmType.Oll))
-                _ollChildrenContainer.Children.Add(new Views.AlgorithmView(algorithm));
-            _pllChildrenContainer.Children.Clear();
-            foreach (var algorithm in Database.Algorithms.Where(p => p.Type == AlgorithmType.Pll))
-                _pllChildrenContainer.Children.Add(new Views.AlgorithmView(algorithm));
+            // TODO
         }
     }
 }

@@ -20,25 +20,15 @@ namespace FrostBlade.UI
     /// </summary>
     public partial class MainWindow : Window
     {
-        public event EventHandler SpacePressed;
-
         public MainWindow()
         {
             InitializeComponent();
 
             var database = new Algorithms.Database("Database");
 
-            _standardSolving.MainWindow = this;
+            _standardSolvingView.MainWindow = this;
+            _ollPractice.Database = database;
             _algorithmIndex.Database = database;
-        }
-
-        void previewKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Space && SpacePressed != null)
-            {
-                SpacePressed(this, EventArgs.Empty);
-                e.Handled = true;
-            }
         }
     }
 }

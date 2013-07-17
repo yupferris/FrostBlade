@@ -13,12 +13,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FrostBlade.UI
+namespace FrostBlade.UI.Views
 {
     /// <summary>
-    /// Interaction logic for StandardSolving.xaml
+    /// Interaction logic for StandardSolvingView.xaml
     /// </summary>
-    public partial class StandardSolving : UserControl
+    public partial class StandardSolvingView : UserControl
     {
         MainWindow _mainWindow;
         public MainWindow MainWindow
@@ -29,40 +29,31 @@ namespace FrostBlade.UI
                 if (value != _mainWindow)
                 {
                     if (_mainWindow != null)
-                        _mainWindow.SpacePressed -= mainWindowSpacePressed;
+                        _mainWindow.PreviewKeyDown -= mainWindowPreviewKeyDown;
                     _mainWindow = value;
                     if (_mainWindow != null)
-                        _mainWindow.SpacePressed += mainWindowSpacePressed;
+                        _mainWindow.PreviewKeyDown += mainWindowPreviewKeyDown;
                 }
             }
         }
 
-        readonly Timer _timer;
-        readonly History _history;
+        public StandardSolving StandardSolving { get; private set; }
 
-        public StandardSolving()
+        public StandardSolvingView()
         {
             InitializeComponent();
 
-            var scrambler = (Scrambler)getResource("_scrambler");
-            _timer = (Timer)getResource("_timer");
-            _history = (History)getResource("_history");
-
-            _timer.Stopped += (sender, e) =>
-                {
-                    _history.Entries.Add(new History.Entry(_history, _timer.CurrentTime));
-                    scrambler.Scramble();
-                };
+            DataContextChanged += (sender, e) => StandardSolving = (e.NewValue as ObjectDataProvider).Data as StandardSolving;
+            StandardSolving = DataContext as StandardSolving;
         }
 
-        object getResource(string name)
+        void mainWindowPreviewKeyDown(object sender, KeyEventArgs e)
         {
-            return ((ObjectDataProvider)Resources[name]).Data;
-        }
-
-        void mainWindowSpacePressed(object sender, EventArgs e)
-        {
-            _timer.StartStop();
+            if (StandardSolving != null && e.Key == Key.Space)
+            {
+                StandardSolving.Timer.StartStop();
+                e.Handled = true;
+            }
         }
 
         void dnfButtonClick(object sender, RoutedEventArgs e)
@@ -82,8 +73,11 @@ namespace FrostBlade.UI
 
         void updateLastHistoryEntryPenaltyState(History.EntryPenaltyState penaltyState)
         {
-            if (_history.Entries.Count > 0)
-                _history.Entries.Last().PenaltyState = penaltyState;
+            if (StandardSolving == null)
+                return;
+
+            if (StandardSolving.History.Entries.Count > 0)
+                StandardSolving.History.Entries.Last().PenaltyState = penaltyState;
         }
     }
 }

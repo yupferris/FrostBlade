@@ -50,6 +50,7 @@
     <Compile Include="NotifyPropertyChanged.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scrambler.cs" />
+    <Compile Include="StandardSolving.cs" />
     <Compile Include="Timer.cs" />
   </ItemGroup>
   <ItemGroup>

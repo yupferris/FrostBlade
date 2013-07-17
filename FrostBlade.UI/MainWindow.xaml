@@ -5,30 +5,26 @@
         xmlns:fbui="clr-namespace:FrostBlade.UI"
         xmlns:views="clr-namespace:FrostBlade.UI.Views"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        Title="FrostBlade" Height="450" Width="1000" PreviewKeyDown="previewKeyDown" Icon="Resources/icon.png">
+        Title="FrostBlade" Height="450" Width="1000" Icon="Resources/icon.png">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ExpressionDark.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <ObjectDataProvider x:Key="_scrambler" ObjectType="fb:Scrambler">
-                <ObjectDataProvider.ConstructorParameters>
-                    <sys:Int32>25</sys:Int32>
-                </ObjectDataProvider.ConstructorParameters>
-            </ObjectDataProvider>
-        
-            <ObjectDataProvider x:Key="_history" ObjectType="fb:History" />
-
-            <ObjectDataProvider x:Key="_timer" ObjectType="fb:Timer" />
+            <ObjectDataProvider x:Key="_standardSolving" ObjectType="fb:StandardSolving" />
         </ResourceDictionary>
     </Window.Resources>
 
     <TabControl>
         <TabItem Header="Standard Solving">
-            <fbui:StandardSolving x:Name="_standardSolving" />
+            <views:StandardSolvingView x:Name="_standardSolvingView" DataContext="{StaticResource ResourceKey=_standardSolving}" />
         </TabItem>
         
+        <TabItem Header="Oll Single">
+            <fbui:AlgorithmPractice x:Name="_ollPractice" />
+        </TabItem>
+
         <TabItem Header="Algorithms">
             <fbui:AlgorithmIndex x:Name="_algorithmIndex" />
         </TabItem>

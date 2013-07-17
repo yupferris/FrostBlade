@@ -43,7 +43,7 @@ namespace FrostBlade.UI.Views
         {
             InitializeComponent();
 
-            DataContextChanged += (sender, e) => History = ((ObjectDataProvider)DataContext).Data as History;
+            DataContextChanged += (sender, e) => History = DataContext as History;
         }
 
         void historyEntriesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
