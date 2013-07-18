@@ -59,16 +59,16 @@ namespace FrostBlade
             }
         }
 
-        bool _hideImage = true;
-        public bool HideImage
+        bool _showImage;
+        public bool ShowImage
         {
-            get { return _hideImage; }
+            get { return _showImage; }
             set
             {
-                if (value != _hideImage)
+                if (value != _showImage)
                 {
-                    _hideImage = value;
-                    OnPropertyChanged("HideImage");
+                    _showImage = value;
+                    OnPropertyChanged("ShowImage");
                 }
             }
         }
@@ -117,7 +117,7 @@ namespace FrostBlade
                     else
                     {
                         if (_countdown == 1)
-                            HideImage = false;
+                            ShowImage = true;
                         DisplayValue = _countdown.ToString();
                     }
                 };
@@ -131,7 +131,7 @@ namespace FrostBlade
                     var algs = Database.Algorithms.Where(x => x.Type == Filter).ToArray();
                     var random = new Random();
                     Image = algs[random.Next(algs.Length)].Image;
-                    HideImage = true;
+                    ShowImage = false;
                     _countdown = 3;
                     DisplayValue = _countdown.ToString();
                     _state = State.Countdown;

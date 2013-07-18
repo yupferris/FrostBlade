@@ -24,8 +24,8 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0" Width="228" Height="228">
-                    <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Source="{Binding Image}" />
-                    <Rectangle Fill="Black" Visibility="{Binding HideImage, Converter={StaticResource ResourceKey=_btov}}" />
+                    <Rectangle Fill="Black" />
+                    <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Source="{Binding Image}" Visibility="{Binding ShowImage, Converter={StaticResource ResourceKey=_btov}}" />
                 </Grid>
 
                 <TextBlock Grid.Row="1" FontSize="48" HorizontalAlignment="Center" FontWeight="Bold" Text="{Binding DisplayValue}" />
