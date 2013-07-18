@@ -7,14 +7,29 @@
              xmlns:views="clr-namespace:FrostBlade.UI.Views"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300" Background="#FF1B1B1B" Foreground="White">
     <UserControl.Resources>
         <ObjectDataProvider x:Key="_history" ObjectType="fb:History" />
-
         <ObjectDataProvider x:Key="_timer" ObjectType="fb:Timer" />
+        
+        <BooleanToVisibilityConverter x:Key="_btov" />
     </UserControl.Resources>
     
     <Grid>
-        
+        <Border VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="228" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Width="228" Height="228">
+                    <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Source="{Binding Image}" />
+                    <Rectangle Fill="Black" Visibility="{Binding HideImage, Converter={StaticResource ResourceKey=_btov}}" />
+                </Grid>
+
+                <TextBlock Grid.Row="1" FontSize="48" HorizontalAlignment="Center" FontWeight="Bold" Text="{Binding DisplayValue}" />
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

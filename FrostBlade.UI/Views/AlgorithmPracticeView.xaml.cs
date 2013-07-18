@@ -20,6 +20,23 @@ namespace FrostBlade.UI.Views
     /// </summary>
     public partial class AlgorithmPracticeView : UserControl
     {
+        MainWindow _mainWindow;
+        public MainWindow MainWindow
+        {
+            get { return _mainWindow; }
+            set
+            {
+                if (value != _mainWindow)
+                {
+                    if (_mainWindow != null)
+                        _mainWindow.PreviewKeyDown -= mainWindowPreviewKeyDown;
+                    _mainWindow = value;
+                    if (_mainWindow != null)
+                        _mainWindow.PreviewKeyDown += mainWindowPreviewKeyDown;
+                }
+            }
+        }
+
         public AlgorithmPractice AlgorithmPractice { get; private set; }
 
         public AlgorithmPracticeView()
@@ -27,6 +44,15 @@ namespace FrostBlade.UI.Views
             InitializeComponent();
 
             DataContextChanged += (sender, e) => AlgorithmPractice = (e.NewValue as ObjectDataProvider).Data as AlgorithmPractice;
+        }
+
+        void mainWindowPreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (AlgorithmPractice != null && IsVisible && e.Key == Key.Space)
+            {
+                AlgorithmPractice.StartStop();
+                e.Handled = true;
+            }
         }
     }
 }

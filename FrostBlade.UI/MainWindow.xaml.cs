@@ -27,7 +27,10 @@ namespace FrostBlade.UI
             var database = new Algorithms.Database("Database");
 
             _standardSolvingView.MainWindow = this;
+            _ollPracticeView.MainWindow = this;
             _ollPracticeView.AlgorithmPractice.Database = database;
+            _pllPracticeView.MainWindow = this;
+            _pllPracticeView.AlgorithmPractice.Database = database;
             _algorithmIndex.Database = database;
         }
     }

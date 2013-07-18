@@ -48,7 +48,7 @@ namespace FrostBlade.UI.Views
 
         void mainWindowPreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (StandardSolving != null && e.Key == Key.Space)
+            if (StandardSolving != null && IsVisible && e.Key == Key.Space)
             {
                 StandardSolving.Timer.StartStop();
                 e.Handled = true;

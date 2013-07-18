@@ -20,6 +20,12 @@
                     <fbalg:AlgorithmType>Oll</fbalg:AlgorithmType>
                 </ObjectDataProvider.ConstructorParameters>
             </ObjectDataProvider>
+
+            <ObjectDataProvider x:Key="_pllPractice" ObjectType="fb:AlgorithmPractice">
+                <ObjectDataProvider.ConstructorParameters>
+                    <fbalg:AlgorithmType>Pll</fbalg:AlgorithmType>
+                </ObjectDataProvider.ConstructorParameters>
+            </ObjectDataProvider>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -28,8 +34,12 @@
             <views:StandardSolvingView x:Name="_standardSolvingView" DataContext="{StaticResource ResourceKey=_standardSolving}" />
         </TabItem>
         
-        <TabItem Header="Oll Single">
+        <TabItem Header="Oll Practice">
             <views:AlgorithmPracticeView x:Name="_ollPracticeView" DataContext="{StaticResource ResourceKey=_ollPractice}" />
+        </TabItem>
+
+        <TabItem Header="Pll Practice">
+            <views:AlgorithmPracticeView x:Name="_pllPracticeView" DataContext="{StaticResource ResourceKey=_pllPractice}" />
         </TabItem>
 
         <TabItem Header="Algorithms">
