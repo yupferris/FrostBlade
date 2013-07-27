@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrostBlade", "FrostBlade\Fr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrostBlade.UI", "FrostBlade.UI\FrostBlade.UI.csproj", "{5BFDBA82-5A26-4F24-A2BE-718868FC81FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hypercube", "Hypercube\Hypercube.csproj", "{90EBDEC3-10F9-428E-9EC0-24706B3008C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{5BFDBA82-5A26-4F24-A2BE-718868FC81FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BFDBA82-5A26-4F24-A2BE-718868FC81FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BFDBA82-5A26-4F24-A2BE-718868FC81FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90EBDEC3-10F9-428E-9EC0-24706B3008C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90EBDEC3-10F9-428E-9EC0-24706B3008C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90EBDEC3-10F9-428E-9EC0-24706B3008C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90EBDEC3-10F9-428E-9EC0-24706B3008C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

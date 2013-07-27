@@ -17,6 +17,18 @@ namespace FrostBlade
             Running
         }
 
+        class AlgorithmStats
+        {
+            public readonly List<double> LastSolves = new List<double>();
+
+            public void Add(double time)
+            {
+                LastSolves.Insert(0, time);
+                if (LastSolves.Count > 5)
+                    LastSolves.Remove(LastSolves.Last());
+            }
+        }
+
         Database _database;
         public Database Database
         {
@@ -27,20 +39,6 @@ namespace FrostBlade
                 {
                     _database = value;
                     OnPropertyChanged("Database");
-                }
-            }
-        }
-
-        AlgorithmType _filter;
-        public AlgorithmType Filter
-        {
-            get { return _filter; }
-            set
-            {
-                if (value != _filter)
-                {
-                    _filter = value;
-                    OnPropertyChanged("Filter");
                 }
             }
         }
@@ -87,14 +85,17 @@ namespace FrostBlade
             }
         }
 
+        readonly AlgorithmType _filter;
         readonly Timer _timer = new Timer();
         State _state = State.Idle;
         int _countdown;
         readonly System.Timers.Timer _countdownTimer = new System.Timers.Timer(1000.0);
 
+        readonly Dictionary<Algorithm, AlgorithmStats> _algorithmStats = new Dictionary<Algorithm, AlgorithmStats>();
+
         public AlgorithmPractice(AlgorithmType filter)
         {
-            Filter = filter;
+            _filter = filter;
 
             _timer.PropertyChanged += (sender, e) =>
                 {
@@ -128,7 +129,7 @@ namespace FrostBlade
             switch (_state)
             {
                 case State.Idle:
-                    var algs = Database.Algorithms.Where(x => x.Type == Filter).ToArray();
+                    var algs = Database.Algorithms.Where(x => x.Type == _filter).ToArray();
                     var random = new Random();
                     Image = algs[random.Next(algs.Length)].Image;
                     ShowImage = false;

@@ -72,11 +72,11 @@ namespace FrostBlade
 
         public void Scramble()
         {
-            var moves = new List<Moves>();
+            var moves = new List<Move>();
             var random = new Random();
             for (int i = 0; i < Length; i++)
             {
-                Moves move;
+                Move move;
                 bool isMoveValid;
                 do
                 {

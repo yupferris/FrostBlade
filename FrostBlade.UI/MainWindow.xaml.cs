@@ -25,12 +25,24 @@ namespace FrostBlade.UI
             InitializeComponent();
 
             var database = new Algorithms.Database("Database");
+            UserData userData;
+            try
+            {
+                userData = UserData.Load("userdata.xml");
+            }
+            catch (Exception)
+            {
+                userData = new UserData();
+            }
 
             _standardSolvingView.MainWindow = this;
+
             _ollPracticeView.MainWindow = this;
             _ollPracticeView.AlgorithmPractice.Database = database;
+
             _pllPracticeView.MainWindow = this;
             _pllPracticeView.AlgorithmPractice.Database = database;
+
             _algorithmIndex.Database = database;
         }
     }

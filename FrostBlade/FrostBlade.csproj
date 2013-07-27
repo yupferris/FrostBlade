@@ -53,6 +53,7 @@
     <Compile Include="Scrambler.cs" />
     <Compile Include="StandardSolving.cs" />
     <Compile Include="Timer.cs" />
+    <Compile Include="UserData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Database\Database.xml">
