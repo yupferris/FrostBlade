@@ -27,18 +27,37 @@ namespace FrostBlade.Algorithms
         readonly BitmapImage _image;
         public BitmapImage Image { get { return _image; } }
 
-        readonly string _moves;
-        public string Moves { get { return _moves; } }
+        readonly string _movesString;
+        public string MovesString { get { return _movesString; } }
+
+        readonly Move[] _moves;
+        public Move[] Moves { get { return _moves; } }
 
         readonly string _comments;
         public string Comments { get { return _comments; } }
 
-        public Algorithm(AlgorithmType type, string name, BitmapImage image, string moves, string comments)
+        public Algorithm(AlgorithmType type, string name, BitmapImage image, string movesString, string comments)
         {
             _type = type;
             _name = name;
             _image = image;
-            _moves = moves;
+            _movesString = movesString;
+            try
+            {
+                var moves = new List<Move>();
+                foreach (var s in _movesString.Split(' '))
+                {
+                    Move m;
+                    if (!MoveHelpers.TryParse(s.Trim().Trim('(', ')'), out m))
+                        throw new Exception("Couldn't parse moves");
+                    moves.Add(m);
+                }
+                _moves = moves.ToArray();
+            }
+            catch (Exception)
+            {
+                _moves = null;
+            }
             _comments = comments;
         }
     }

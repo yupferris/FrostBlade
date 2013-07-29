@@ -15,7 +15,7 @@
 
         <TextBlock Grid.Column="0" Margin="4" VerticalAlignment="Center" Text="{Binding Name}" />
         <Image Grid.Column="1" Margin="4" Source="{Binding Image}" Width="76" Height="76" />
-        <TextBlock Grid.Column="2" Margin="4" VerticalAlignment="Center" FontSize="16" TextWrapping="Wrap" FontWeight="Bold" Text="{Binding Moves}" />
+        <TextBlock Grid.Column="2" Margin="4" VerticalAlignment="Center" FontSize="16" TextWrapping="Wrap" FontWeight="Bold" Text="{Binding MovesString}" />
         <TextBlock Grid.Column="3" Margin="4" VerticalAlignment="Center" TextAlignment="Justify" TextWrapping="Wrap" Text="{Binding Comments}" />
     </Grid>
 </UserControl>

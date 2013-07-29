@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FrostBlade;
+using FrostBlade.Algorithms;
 
 namespace FrostBlade.UI
 {
@@ -24,7 +26,7 @@ namespace FrostBlade.UI
         {
             InitializeComponent();
 
-            var database = new Algorithms.Database("Database");
+            var database = new Database("Database");
             UserData userData;
             try
             {

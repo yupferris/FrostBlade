@@ -14,12 +14,10 @@ namespace Hypercube
         {
             try
             {
+                var database = new Database("Database");
+                var alg = database.Algorithms.Where(x => x.Name == "Ja").FirstOrDefault();
                 var cube = new Cube();
-                cube.Apply(Move.R2);
-                cube.Apply(Move.U2);
-                cube.Apply(Move.D);
-                cube.Apply(Move.R);
-                //cube.Apply(Move.UPrime);
+                cube.Apply(alg);
                 cube.Print();
             }
             catch (Exception e)

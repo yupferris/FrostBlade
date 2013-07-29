@@ -10,8 +10,9 @@ namespace Hypercube
 {
     enum Color
     {
-        White,
+        Black,
         Yellow,
+        White,
         Green,
         Blue,
         Red,
@@ -20,304 +21,375 @@ namespace Hypercube
 
     class Cube
     {
-        enum FaceIndex
+        class Piece
         {
-            Top,
-            Left,
-            Front,
-            Right,
-            Back,
-            Bottom
+            public readonly Color[] Colors = new Color[6];
+
+            public void Reset()
+            {
+                for (int i = 0; i < 6; i++)
+                    Colors[i] = Color.Black;
+            }
+
+            public void Apply(Move move)
+            {
+                switch (move)
+                {
+                    case Move.U:
+                    case Move.DPrime:
+                        {
+                            var tmp = Colors[(int)FrostBlade.FaceOrSlice.F];
+                            Colors[(int)FrostBlade.FaceOrSlice.F] = Colors[(int)FrostBlade.FaceOrSlice.R];
+                            Colors[(int)FrostBlade.FaceOrSlice.R] = Colors[(int)FrostBlade.FaceOrSlice.B];
+                            Colors[(int)FrostBlade.FaceOrSlice.B] = Colors[(int)FrostBlade.FaceOrSlice.L];
+                            Colors[(int)FrostBlade.FaceOrSlice.L] = tmp;
+                        }
+                        break;
+
+                    case Move.UPrime:
+                    case Move.D:
+                        {
+                            var tmp = Colors[(int)FrostBlade.FaceOrSlice.F];
+                            Colors[(int)FrostBlade.FaceOrSlice.F] = Colors[(int)FrostBlade.FaceOrSlice.L];
+                            Colors[(int)FrostBlade.FaceOrSlice.L] = Colors[(int)FrostBlade.FaceOrSlice.B];
+                            Colors[(int)FrostBlade.FaceOrSlice.B] = Colors[(int)FrostBlade.FaceOrSlice.R];
+                            Colors[(int)FrostBlade.FaceOrSlice.R] = tmp;
+                        }
+                        break;
+
+                    case Move.U2:
+                    case Move.D2:
+                        {
+                            var tmp = Colors[(int)FrostBlade.FaceOrSlice.F];
+                            Colors[(int)FrostBlade.FaceOrSlice.F] = Colors[(int)FrostBlade.FaceOrSlice.B];
+                            Colors[(int)FrostBlade.FaceOrSlice.B] = tmp;
+                            tmp = Colors[(int)FrostBlade.FaceOrSlice.L];
+                            Colors[(int)FrostBlade.FaceOrSlice.L] = Colors[(int)FrostBlade.FaceOrSlice.R];
+                            Colors[(int)FrostBlade.FaceOrSlice.R] = tmp;
+                        }
+                        break;
+
+                    case Move.L:
+                    case Move.RPrime:
+                        {
+                            var tmp = Colors[(int)FrostBlade.FaceOrSlice.F];
+                            Colors[(int)FrostBlade.FaceOrSlice.F] = Colors[(int)FrostBlade.FaceOrSlice.U];
+                            Colors[(int)FrostBlade.FaceOrSlice.U] = Colors[(int)FrostBlade.FaceOrSlice.B];
+                            Colors[(int)FrostBlade.FaceOrSlice.B] = Colors[(int)FrostBlade.FaceOrSlice.D];
+                            Colors[(int)FrostBlade.FaceOrSlice.D] = tmp;
+                        }
+                        break;
+
+                    case Move.LPrime:
+                    case Move.R:
+                        {
+                            var tmp = Colors[(int)FrostBlade.FaceOrSlice.F];
+                            Colors[(int)FrostBlade.FaceOrSlice.F] = Colors[(int)FrostBlade.FaceOrSlice.D];
+                            Colors[(int)FrostBlade.FaceOrSlice.D] = Colors[(int)FrostBlade.FaceOrSlice.B];
+                            Colors[(int)FrostBlade.FaceOrSlice.B] = Colors[(int)FrostBlade.FaceOrSlice.U];
+                            Colors[(int)FrostBlade.FaceOrSlice.U] = tmp;
+                        }
+                        break;
+
+                    case Move.L2:
+                    case Move.R2:
+                        {
+                            var tmp = Colors[(int)FrostBlade.FaceOrSlice.U];
+                            Colors[(int)FrostBlade.FaceOrSlice.U] = Colors[(int)FrostBlade.FaceOrSlice.D];
+                            Colors[(int)FrostBlade.FaceOrSlice.D] = tmp;
+                            tmp = Colors[(int)FrostBlade.FaceOrSlice.F];
+                            Colors[(int)FrostBlade.FaceOrSlice.F] = Colors[(int)FrostBlade.FaceOrSlice.B];
+                            Colors[(int)FrostBlade.FaceOrSlice.B] = tmp;
+                        }
+                        break;
+
+                    case Move.F:
+                    case Move.BPrime:
+                        {
+                            var tmp = Colors[(int)FrostBlade.FaceOrSlice.U];
+                            Colors[(int)FrostBlade.FaceOrSlice.U] = Colors[(int)FrostBlade.FaceOrSlice.L];
+                            Colors[(int)FrostBlade.FaceOrSlice.L] = Colors[(int)FrostBlade.FaceOrSlice.D];
+                            Colors[(int)FrostBlade.FaceOrSlice.D] = Colors[(int)FrostBlade.FaceOrSlice.R];
+                            Colors[(int)FrostBlade.FaceOrSlice.R] = tmp;
+                        }
+                        break;
+
+                    case Move.FPrime:
+                    case Move.B:
+                        {
+                            var tmp = Colors[(int)FrostBlade.FaceOrSlice.U];
+                            Colors[(int)FrostBlade.FaceOrSlice.U] = Colors[(int)FrostBlade.FaceOrSlice.R];
+                            Colors[(int)FrostBlade.FaceOrSlice.R] = Colors[(int)FrostBlade.FaceOrSlice.D];
+                            Colors[(int)FrostBlade.FaceOrSlice.D] = Colors[(int)FrostBlade.FaceOrSlice.L];
+                            Colors[(int)FrostBlade.FaceOrSlice.L] = tmp;
+                        }
+                        break;
+
+                    case Move.F2:
+                    case Move.B2:
+                        {
+                            var tmp = Colors[(int)FrostBlade.FaceOrSlice.U];
+                            Colors[(int)FrostBlade.FaceOrSlice.U] = Colors[(int)FrostBlade.FaceOrSlice.D];
+                            Colors[(int)FrostBlade.FaceOrSlice.D] = tmp;
+                            tmp = Colors[(int)FrostBlade.FaceOrSlice.L];
+                            Colors[(int)FrostBlade.FaceOrSlice.L] = Colors[(int)FrostBlade.FaceOrSlice.R];
+                            Colors[(int)FrostBlade.FaceOrSlice.R] = tmp;
+                        }
+                        break;
+
+                    default:
+                        throw new NotImplementedException();
+                }
+            }
         }
 
-        enum MoveType
+        enum PieceIndex
         {
-            Clockwise,
-            CounterClockwise,
-            Double
+            // Centers
+            U, D, F, B, L, R,
+
+            // Edges
+            UF, UL, UB, UR,
+            FL, BL, BR, FR,
+            DF, DL, DB, DR,
+
+            // Corners
+            UFL, UFR, UBL, UBR,
+            DFL, DFR, DBL, DBR
         }
 
-        readonly Color[,] _faces = new Color[6, 9];
+        class Face
+        {
+            public readonly FaceOrSlice FaceOrSlice;
+            public readonly Color Color;
+            public readonly PieceIndex[] PieceIndices;
+
+            readonly Cube _cube;
+
+            public Face(Cube cube, FaceOrSlice faceOrSlice, Color color, PieceIndex[] pieceIndices)
+            {
+                _cube = cube;
+                FaceOrSlice = faceOrSlice;
+                Color = color;
+                PieceIndices = pieceIndices;
+            }
+
+            public void Reset()
+            {
+                foreach (var index in PieceIndices)
+                    _cube._pieces[(int)index].Colors[(int)FaceOrSlice] = Color;
+            }
+
+            public void Apply(Move move)
+            {
+                foreach (var index in PieceIndices)
+                    _cube._pieces[(int)index].Apply(move);
+
+                switch (MoveHelpers.GetMoveType(move))
+                {
+                    case MoveType.Clockwise:
+                        {
+                            // Edges
+                            var tmp = _cube._pieces[(int)PieceIndices[1]];
+                            _cube._pieces[(int)PieceIndices[1]] = _cube._pieces[(int)PieceIndices[3]];
+                            _cube._pieces[(int)PieceIndices[3]] = _cube._pieces[(int)PieceIndices[7]];
+                            _cube._pieces[(int)PieceIndices[7]] = _cube._pieces[(int)PieceIndices[5]];
+                            _cube._pieces[(int)PieceIndices[5]] = tmp;
+
+                            // Corners
+                            tmp = _cube._pieces[(int)PieceIndices[0]];
+                            _cube._pieces[(int)PieceIndices[0]] = _cube._pieces[(int)PieceIndices[6]];
+                            _cube._pieces[(int)PieceIndices[6]] = _cube._pieces[(int)PieceIndices[8]];
+                            _cube._pieces[(int)PieceIndices[8]] = _cube._pieces[(int)PieceIndices[2]];
+                            _cube._pieces[(int)PieceIndices[2]] = tmp;
+                        }
+                        break;
+
+                    case MoveType.CounterClockwise:
+                        {
+                            // Edges
+                            var tmp = _cube._pieces[(int)PieceIndices[1]];
+                            _cube._pieces[(int)PieceIndices[1]] = _cube._pieces[(int)PieceIndices[5]];
+                            _cube._pieces[(int)PieceIndices[5]] = _cube._pieces[(int)PieceIndices[7]];
+                            _cube._pieces[(int)PieceIndices[7]] = _cube._pieces[(int)PieceIndices[3]];
+                            _cube._pieces[(int)PieceIndices[3]] = tmp;
+
+                            // Corners
+                            tmp = _cube._pieces[(int)PieceIndices[0]];
+                            _cube._pieces[(int)PieceIndices[0]] = _cube._pieces[(int)PieceIndices[2]];
+                            _cube._pieces[(int)PieceIndices[2]] = _cube._pieces[(int)PieceIndices[8]];
+                            _cube._pieces[(int)PieceIndices[8]] = _cube._pieces[(int)PieceIndices[6]];
+                            _cube._pieces[(int)PieceIndices[6]] = tmp;
+                        }
+                        break;
+
+                    case MoveType.Double:
+                        {
+                            // Edges
+                            var tmp = _cube._pieces[(int)PieceIndices[1]];
+                            _cube._pieces[(int)PieceIndices[1]] = _cube._pieces[(int)PieceIndices[7]];
+                            _cube._pieces[(int)PieceIndices[7]] = tmp;
+                            tmp = _cube._pieces[(int)PieceIndices[3]];
+                            _cube._pieces[(int)PieceIndices[3]] = _cube._pieces[(int)PieceIndices[5]];
+                            _cube._pieces[(int)PieceIndices[5]] = tmp;
+
+                            // Corners
+                            tmp = _cube._pieces[(int)PieceIndices[0]];
+                            _cube._pieces[(int)PieceIndices[0]] = _cube._pieces[(int)PieceIndices[8]];
+                            _cube._pieces[(int)PieceIndices[8]] = tmp;
+                            tmp = _cube._pieces[(int)PieceIndices[2]];
+                            _cube._pieces[(int)PieceIndices[2]] = _cube._pieces[(int)PieceIndices[6]];
+                            _cube._pieces[(int)PieceIndices[6]] = tmp;
+                        }
+                        break;
+                }
+            }
+        }
+
+        readonly Piece[] _pieces = new Piece[26];
+        readonly Face[] _faces = new Face[6];
 
         public Cube()
         {
+            for (int i = 0; i < _pieces.Length; i++)
+                _pieces[i] = new Piece();
+
+            _faces[(int)FaceOrSlice.U] = new Face(this, FaceOrSlice.U, Color.Yellow, new PieceIndex[]
+                {
+                    PieceIndex.UBL,
+                    PieceIndex.UB,
+                    PieceIndex.UBR,
+                    PieceIndex.UL,
+                    PieceIndex.U,
+                    PieceIndex.UR,
+                    PieceIndex.UFL,
+                    PieceIndex.UF,
+                    PieceIndex.UFR
+                });
+            _faces[(int)FaceOrSlice.D] = new Face(this, FaceOrSlice.D, Color.White, new PieceIndex[]
+                {
+                    PieceIndex.DFL,
+                    PieceIndex.DF,
+                    PieceIndex.DFR,
+                    PieceIndex.DL,
+                    PieceIndex.D,
+                    PieceIndex.DR,
+                    PieceIndex.DBL,
+                    PieceIndex.DB,
+                    PieceIndex.DBR
+                });
+            _faces[(int)FaceOrSlice.F] = new Face(this, FaceOrSlice.F, Color.Green, new PieceIndex[]
+                {
+                    PieceIndex.UFL,
+                    PieceIndex.UF,
+                    PieceIndex.UFR,
+                    PieceIndex.FL,
+                    PieceIndex.F,
+                    PieceIndex.FR,
+                    PieceIndex.DFL,
+                    PieceIndex.DF,
+                    PieceIndex.DFR
+                });
+            _faces[(int)FaceOrSlice.B] = new Face(this, FaceOrSlice.B, Color.Blue, new PieceIndex[]
+                {
+                    PieceIndex.UBR,
+                    PieceIndex.UB,
+                    PieceIndex.UBL,
+                    PieceIndex.BR,
+                    PieceIndex.B,
+                    PieceIndex.BL,
+                    PieceIndex.DBR,
+                    PieceIndex.DB,
+                    PieceIndex.DBL
+                });
+            _faces[(int)FaceOrSlice.L] = new Face(this, FaceOrSlice.L, Color.Red, new PieceIndex[]
+                {
+                    PieceIndex.UBL,
+                    PieceIndex.UL,
+                    PieceIndex.UFL,
+                    PieceIndex.BL,
+                    PieceIndex.L,
+                    PieceIndex.FL,
+                    PieceIndex.DBL,
+                    PieceIndex.DL,
+                    PieceIndex.DFL
+                });
+            _faces[(int)FaceOrSlice.R] = new Face(this, FaceOrSlice.R, Color.Orange, new PieceIndex[]
+                {
+                    PieceIndex.UFR,
+                    PieceIndex.UR,
+                    PieceIndex.UBR,
+                    PieceIndex.FR,
+                    PieceIndex.R,
+                    PieceIndex.BR,
+                    PieceIndex.DFR,
+                    PieceIndex.DR,
+                    PieceIndex.DBR
+                });
+
             Reset();
         }
 
         public void Reset()
         {
-            for (int i = 0; i < 9; i++)
-            {
-                _faces[(int)FaceIndex.Top, i] = Color.Yellow;
-                _faces[(int)FaceIndex.Left, i] = Color.Red;
-                _faces[(int)FaceIndex.Front, i] = Color.Green;
-                _faces[(int)FaceIndex.Right, i] = Color.Orange;
-                _faces[(int)FaceIndex.Back, i] = Color.Blue;
-                _faces[(int)FaceIndex.Bottom, i] = Color.White;
-            }
+            foreach (var piece in _pieces)
+                piece.Reset();
+            foreach (var face in _faces)
+                face.Reset();
         }
 
         public void Apply(Move move)
         {
-            switch (move)
-            {
-                case Move.U:
-                    {
-                        // Rotate U colors
-                        rotateFaceColors((int)FaceIndex.Top, MoveType.Clockwise);
-
-                        // Rotate adjacent edge colors
-                        for (int i = 0; i < 3; i++)
-                        {
-                            var tmp = _faces[(int)FaceIndex.Left, i];
-                            _faces[(int)FaceIndex.Left, i] = _faces[(int)FaceIndex.Front, i];
-                            _faces[(int)FaceIndex.Front, i] = _faces[(int)FaceIndex.Right, i];
-                            _faces[(int)FaceIndex.Right, i] = _faces[(int)FaceIndex.Back, i];
-                            _faces[(int)FaceIndex.Back, i] = tmp;
-                        }
-                    }
-                    break;
-
-                case Move.UPrime:
-                    {
-                        // Rotate U colors
-                        rotateFaceColors((int)FaceIndex.Top, MoveType.CounterClockwise);
-
-                        // Rotate adjacent edge colors
-                        for (int i = 0; i < 3; i++)
-                        {
-                            var tmp = _faces[(int)FaceIndex.Left, i];
-                            _faces[(int)FaceIndex.Left, i] = _faces[(int)FaceIndex.Back, i];
-                            _faces[(int)FaceIndex.Back, i] = _faces[(int)FaceIndex.Right, i];
-                            _faces[(int)FaceIndex.Right, i] = _faces[(int)FaceIndex.Front, i];
-                            _faces[(int)FaceIndex.Front, i] = tmp;
-                        }
-                    }
-                    break;
-
-                case Move.U2:
-                    {
-                        // Rotate U colors
-                        rotateFaceColors((int)FaceIndex.Top, MoveType.Double);
-
-                        // Rotate adjacent edge colors
-                        for (int i = 0; i < 3; i++)
-                        {
-                            var tmp = _faces[(int)FaceIndex.Left, i];
-                            _faces[(int)FaceIndex.Left, i] = _faces[(int)FaceIndex.Right, i];
-                            _faces[(int)FaceIndex.Right, i] = tmp;
-                            tmp = _faces[(int)FaceIndex.Front, i];
-                            _faces[(int)FaceIndex.Front, i] = _faces[(int)FaceIndex.Back, i];
-                            _faces[(int)FaceIndex.Back, i] = tmp;
-                        }
-                    }
-                    break;
-
-                case Move.R: // TODO: BROKEN AS FUCK
-                    {
-                        // Rotate R colors
-                        rotateFaceColors((int)FaceIndex.Right, MoveType.Clockwise);
-
-                        // Rotate adjacent edge colors
-                        for (int i = 0; i < 3; i++)
-                        {
-                            int pos = i * 3 + 2;
-                            int backPos = pos - 2;
-                            var tmp = _faces[(int)FaceIndex.Front, pos];
-                            _faces[(int)FaceIndex.Front, pos] = _faces[(int)FaceIndex.Bottom, pos];
-                            _faces[(int)FaceIndex.Bottom, pos] = _faces[(int)FaceIndex.Back, backPos];
-                            _faces[(int)FaceIndex.Back, backPos] = _faces[(int)FaceIndex.Top, pos];
-                            _faces[(int)FaceIndex.Top, pos] = tmp;
-                        }
-                    }
-                    break;
-
-                case Move.R2:
-                    {
-                        // Rotate R colors
-                        rotateFaceColors((int)FaceIndex.Right, MoveType.Double);
-
-                        // Rotate adjacent edge colors
-                        for (int i = 0; i < 3; i++)
-                        {
-                            int pos = i * 3 + 2;
-                            int backPos = pos - 2;
-                            var tmp = _faces[(int)FaceIndex.Front, pos];
-                            _faces[(int)FaceIndex.Front, pos] = _faces[(int)FaceIndex.Back, backPos];
-                            _faces[(int)FaceIndex.Back, backPos] = tmp;
-                            tmp = _faces[(int)FaceIndex.Top, pos];
-                            _faces[(int)FaceIndex.Top, pos] = _faces[(int)FaceIndex.Bottom, pos];
-                            _faces[(int)FaceIndex.Bottom, pos] = tmp;
-                        }
-                    }
-                    break;
-
-                case Move.D:
-                    {
-                        // Rotate D colors
-                        rotateFaceColors((int)FaceIndex.Bottom, MoveType.Clockwise);
-
-                        // Rotate adjacent edge colors
-                        for (int i = 6; i < 9; i++)
-                        {
-                            var tmp = _faces[(int)FaceIndex.Left, i];
-                            _faces[(int)FaceIndex.Left, i] = _faces[(int)FaceIndex.Back, i];
-                            _faces[(int)FaceIndex.Back, i] = _faces[(int)FaceIndex.Right, i];
-                            _faces[(int)FaceIndex.Right, i] = _faces[(int)FaceIndex.Front, i];
-                            _faces[(int)FaceIndex.Front, i] = tmp;
-                        }
-                    }
-                    break;
-
-                case Move.DPrime:
-                    {
-                        // Rotate D colors
-                        rotateFaceColors((int)FaceIndex.Bottom, MoveType.CounterClockwise);
-
-                        // Rotate adjacent edge colors
-                        for (int i = 6; i < 9; i++)
-                        {
-                            var tmp = _faces[(int)FaceIndex.Left, i];
-                            _faces[(int)FaceIndex.Left, i] = _faces[(int)FaceIndex.Front, i];
-                            _faces[(int)FaceIndex.Front, i] = _faces[(int)FaceIndex.Right, i];
-                            _faces[(int)FaceIndex.Right, i] = _faces[(int)FaceIndex.Back, i];
-                            _faces[(int)FaceIndex.Back, i] = tmp;
-                        }
-                    }
-                    break;
-
-                case Move.D2:
-                    {
-                        // Rotate D colors
-                        rotateFaceColors((int)FaceIndex.Bottom, MoveType.Double);
-
-                        // Rotate adjacent edge colors
-                        for (int i = 6; i < 9; i++)
-                        {
-                            var tmp1 = _faces[(int)FaceIndex.Left, i];
-                            _faces[(int)FaceIndex.Left, i] = _faces[(int)FaceIndex.Right, i];
-                            _faces[(int)FaceIndex.Right, i] = tmp1;
-                            var tmp2 = _faces[(int)FaceIndex.Front, i];
-                            _faces[(int)FaceIndex.Front, i] = _faces[(int)FaceIndex.Back, i];
-                            _faces[(int)FaceIndex.Back, i] = tmp2;
-                        }
-                    }
-                    break;
-
-                default:
-                    throw new NotImplementedException();
-            }
-        }
-
-        void rotateFaceColors(int faceIndex, MoveType type)
-        {
-            switch (type)
-            {
-                case MoveType.Clockwise:
-                    {
-                        // Corners
-                        var tmp = _faces[faceIndex, 0];
-                        _faces[faceIndex, 0] = _faces[faceIndex, 6];
-                        _faces[faceIndex, 6] = _faces[faceIndex, 8];
-                        _faces[faceIndex, 8] = _faces[faceIndex, 2];
-                        _faces[faceIndex, 2] = tmp;
-
-                        // Edges
-                        tmp = _faces[faceIndex, 1];
-                        _faces[faceIndex, 1] = _faces[faceIndex, 3];
-                        _faces[faceIndex, 3] = _faces[faceIndex, 7];
-                        _faces[faceIndex, 7] = _faces[faceIndex, 5];
-                        _faces[faceIndex, 5] = tmp;
-                    }
-                    break;
-
-                case MoveType.CounterClockwise:
-                    {
-                        // Corners
-                        var tmp = _faces[faceIndex, 0];
-                        _faces[faceIndex, 0] = _faces[faceIndex, 2];
-                        _faces[faceIndex, 2] = _faces[faceIndex, 8];
-                        _faces[faceIndex, 8] = _faces[faceIndex, 6];
-                        _faces[faceIndex, 6] = tmp;
-
-                        // Edges
-                        tmp = _faces[faceIndex, 1];
-                        _faces[faceIndex, 1] = _faces[faceIndex, 5];
-                        _faces[faceIndex, 5] = _faces[faceIndex, 7];
-                        _faces[faceIndex, 7] = _faces[faceIndex, 3];
-                        _faces[faceIndex, 3] = tmp;
-                    }
-                    break;
-
-                case MoveType.Double:
-                    {
-                        // Corners
-                        var tmp = _faces[faceIndex, 0];
-                        _faces[faceIndex, 0] = _faces[faceIndex, 8];
-                        _faces[faceIndex, 8] = tmp;
-                        tmp = _faces[faceIndex, 2];
-                        _faces[faceIndex, 2] = _faces[faceIndex, 6];
-                        _faces[faceIndex, 6] = tmp;
-
-                        // Edges
-                        tmp = _faces[faceIndex, 1];
-                        _faces[faceIndex, 1] = _faces[faceIndex, 7];
-                        _faces[faceIndex, 7] = tmp;
-                        tmp = _faces[faceIndex, 3];
-                        _faces[faceIndex, 3] = _faces[faceIndex, 5];
-                        _faces[faceIndex, 5] = tmp;
-                    }
-                    break;
-            }
+            _faces[(int)MoveHelpers.GetMoveFaceOrSlice(move)].Apply(move);
         }
 
         public void Apply(Algorithm alg)
         {
-            // TODO
-            /*foreach (var move in alg.Moves)
-                Apply(move);*/
+            foreach (var move in alg.Moves)
+                Apply(move);
         }
 
         public void Print()
         {
             var originalColor = Console.ForegroundColor;
 
+            var face = _faces[(int)FaceOrSlice.U];
             for (int y = 0; y < 3; y++)
             {
                 Console.Write("   ");
                 for (int x = 0; x < 3; x++)
                 {
-                    int pos = y * 3 + x;
-                    var color = _faces[(int)FaceIndex.Top, pos];
-                    setConsoleColor(color);
+                    var piece = _pieces[(int)face.PieceIndices[y * 3 + x]];
+                    setConsoleColor(piece.Colors[(int)face.FaceOrSlice]);
                     Console.Write("X");
                 }
                 Console.WriteLine();
             }
 
+            var faces = new FaceOrSlice[] { FaceOrSlice.L, FaceOrSlice.F, FaceOrSlice.R, FaceOrSlice.B };
             for (int y = 0; y < 3; y++)
             {
-                for (int f = (int)FaceIndex.Left; f <= (int)FaceIndex.Back; f++)
+                for (int f = 0; f < faces.Length; f++)
                 {
+                    face = _faces[(int)faces[f]];
                     for (int x = 0; x < 3; x++)
                     {
-                        int pos = y * 3 + x;
-                        var color = _faces[f, pos];
-                        setConsoleColor(color);
+                        var piece = _pieces[(int)face.PieceIndices[y * 3 + x]];
+                        setConsoleColor(piece.Colors[(int)face.FaceOrSlice]);
                         Console.Write("X");
                     }
                 }
                 Console.WriteLine();
             }
 
+            face = _faces[(int)FaceOrSlice.D];
             for (int y = 0; y < 3; y++)
             {
                 Console.Write("   ");
                 for (int x = 0; x < 3; x++)
                 {
-                    int pos = y * 3 + x;
-                    var color = _faces[(int)FaceIndex.Bottom, pos];
-                    setConsoleColor(color);
+                    var piece = _pieces[(int)face.PieceIndices[y * 3 + x]];
+                    setConsoleColor(piece.Colors[(int)face.FaceOrSlice]);
                     Console.Write("X");
                 }
                 Console.WriteLine();
@@ -333,12 +405,13 @@ namespace Hypercube
             ConsoleColor consoleColor;
             switch (color)
             {
-                case Color.White:
+                case Color.Black:
                 default:
-                    consoleColor = ConsoleColor.White;
+                    consoleColor = ConsoleColor.Black;
                     break;
 
                 case Color.Yellow: consoleColor = ConsoleColor.Yellow; break;
+                case Color.White: consoleColor = ConsoleColor.White; break;
                 case Color.Green: consoleColor = ConsoleColor.Green; break;
                 case Color.Blue: consoleColor = ConsoleColor.Blue; break;
                 case Color.Red: consoleColor = ConsoleColor.Red; break;
