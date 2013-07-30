@@ -15,7 +15,7 @@ namespace Hypercube
             try
             {
                 var database = new Database("Database");
-                var alg = database.Algorithms.Where(x => x.Name == "Ja").FirstOrDefault();
+                var alg = database.Algorithms.Where(x => x.Name == "T").FirstOrDefault();
                 var cube = new Cube();
                 cube.Apply(alg);
                 cube.Print();

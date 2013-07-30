@@ -158,7 +158,7 @@ namespace Hypercube
             DFL, DFR, DBL, DBR
         }
 
-        class Face
+        class Group
         {
             public readonly FaceOrSlice FaceOrSlice;
             public readonly Color Color;
@@ -166,7 +166,7 @@ namespace Hypercube
 
             readonly Cube _cube;
 
-            public Face(Cube cube, FaceOrSlice faceOrSlice, Color color, PieceIndex[] pieceIndices)
+            public Group(Cube cube, FaceOrSlice faceOrSlice, Color color, PieceIndex[] pieceIndices)
             {
                 _cube = cube;
                 FaceOrSlice = faceOrSlice;
@@ -247,14 +247,14 @@ namespace Hypercube
         }
 
         readonly Piece[] _pieces = new Piece[26];
-        readonly Face[] _faces = new Face[6];
+        readonly Group[] _groups = new Group[6];
 
         public Cube()
         {
             for (int i = 0; i < _pieces.Length; i++)
                 _pieces[i] = new Piece();
 
-            _faces[(int)FaceOrSlice.U] = new Face(this, FaceOrSlice.U, Color.Yellow, new PieceIndex[]
+            _groups[(int)FaceOrSlice.U] = new Group(this, FaceOrSlice.U, Color.Yellow, new PieceIndex[]
                 {
                     PieceIndex.UBL,
                     PieceIndex.UB,
@@ -266,7 +266,7 @@ namespace Hypercube
                     PieceIndex.UF,
                     PieceIndex.UFR
                 });
-            _faces[(int)FaceOrSlice.D] = new Face(this, FaceOrSlice.D, Color.White, new PieceIndex[]
+            _groups[(int)FaceOrSlice.D] = new Group(this, FaceOrSlice.D, Color.White, new PieceIndex[]
                 {
                     PieceIndex.DFL,
                     PieceIndex.DF,
@@ -278,7 +278,7 @@ namespace Hypercube
                     PieceIndex.DB,
                     PieceIndex.DBR
                 });
-            _faces[(int)FaceOrSlice.F] = new Face(this, FaceOrSlice.F, Color.Green, new PieceIndex[]
+            _groups[(int)FaceOrSlice.F] = new Group(this, FaceOrSlice.F, Color.Green, new PieceIndex[]
                 {
                     PieceIndex.UFL,
                     PieceIndex.UF,
@@ -290,7 +290,7 @@ namespace Hypercube
                     PieceIndex.DF,
                     PieceIndex.DFR
                 });
-            _faces[(int)FaceOrSlice.B] = new Face(this, FaceOrSlice.B, Color.Blue, new PieceIndex[]
+            _groups[(int)FaceOrSlice.B] = new Group(this, FaceOrSlice.B, Color.Blue, new PieceIndex[]
                 {
                     PieceIndex.UBR,
                     PieceIndex.UB,
@@ -302,7 +302,7 @@ namespace Hypercube
                     PieceIndex.DB,
                     PieceIndex.DBL
                 });
-            _faces[(int)FaceOrSlice.L] = new Face(this, FaceOrSlice.L, Color.Red, new PieceIndex[]
+            _groups[(int)FaceOrSlice.L] = new Group(this, FaceOrSlice.L, Color.Red, new PieceIndex[]
                 {
                     PieceIndex.UBL,
                     PieceIndex.UL,
@@ -314,7 +314,7 @@ namespace Hypercube
                     PieceIndex.DL,
                     PieceIndex.DFL
                 });
-            _faces[(int)FaceOrSlice.R] = new Face(this, FaceOrSlice.R, Color.Orange, new PieceIndex[]
+            _groups[(int)FaceOrSlice.R] = new Group(this, FaceOrSlice.R, Color.Orange, new PieceIndex[]
                 {
                     PieceIndex.UFR,
                     PieceIndex.UR,
@@ -334,13 +334,13 @@ namespace Hypercube
         {
             foreach (var piece in _pieces)
                 piece.Reset();
-            foreach (var face in _faces)
-                face.Reset();
+            foreach (var group in _groups)
+                group.Reset();
         }
 
         public void Apply(Move move)
         {
-            _faces[(int)MoveHelpers.GetMoveFaceOrSlice(move)].Apply(move);
+            _groups[(int)MoveHelpers.GetMoveFaceOrSlice(move)].Apply(move);
         }
 
         public void Apply(Algorithm alg)
@@ -353,14 +353,14 @@ namespace Hypercube
         {
             var originalColor = Console.ForegroundColor;
 
-            var face = _faces[(int)FaceOrSlice.U];
+            var group = _groups[(int)FaceOrSlice.U];
             for (int y = 0; y < 3; y++)
             {
                 Console.Write("   ");
                 for (int x = 0; x < 3; x++)
                 {
-                    var piece = _pieces[(int)face.PieceIndices[y * 3 + x]];
-                    setConsoleColor(piece.Colors[(int)face.FaceOrSlice]);
+                    var piece = _pieces[(int)group.PieceIndices[y * 3 + x]];
+                    setConsoleColor(piece.Colors[(int)group.FaceOrSlice]);
                     Console.Write("X");
                 }
                 Console.WriteLine();
@@ -371,25 +371,25 @@ namespace Hypercube
             {
                 for (int f = 0; f < faces.Length; f++)
                 {
-                    face = _faces[(int)faces[f]];
+                    group = _groups[(int)faces[f]];
                     for (int x = 0; x < 3; x++)
                     {
-                        var piece = _pieces[(int)face.PieceIndices[y * 3 + x]];
-                        setConsoleColor(piece.Colors[(int)face.FaceOrSlice]);
+                        var piece = _pieces[(int)group.PieceIndices[y * 3 + x]];
+                        setConsoleColor(piece.Colors[(int)group.FaceOrSlice]);
                         Console.Write("X");
                     }
                 }
                 Console.WriteLine();
             }
 
-            face = _faces[(int)FaceOrSlice.D];
+            group = _groups[(int)FaceOrSlice.D];
             for (int y = 0; y < 3; y++)
             {
                 Console.Write("   ");
                 for (int x = 0; x < 3; x++)
                 {
-                    var piece = _pieces[(int)face.PieceIndices[y * 3 + x]];
-                    setConsoleColor(piece.Colors[(int)face.FaceOrSlice]);
+                    var piece = _pieces[(int)group.PieceIndices[y * 3 + x]];
+                    setConsoleColor(piece.Colors[(int)group.FaceOrSlice]);
                     Console.Write("X");
                 }
                 Console.WriteLine();
