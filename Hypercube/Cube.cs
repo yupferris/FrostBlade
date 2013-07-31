@@ -37,109 +37,65 @@ namespace Hypercube
                 {
                     case Move.U:
                     case Move.DPrime:
-                        {
-                            var tmp = Colors[(int)FrostBlade.FaceOrSlice.F];
-                            Colors[(int)FrostBlade.FaceOrSlice.F] = Colors[(int)FrostBlade.FaceOrSlice.R];
-                            Colors[(int)FrostBlade.FaceOrSlice.R] = Colors[(int)FrostBlade.FaceOrSlice.B];
-                            Colors[(int)FrostBlade.FaceOrSlice.B] = Colors[(int)FrostBlade.FaceOrSlice.L];
-                            Colors[(int)FrostBlade.FaceOrSlice.L] = tmp;
-                        }
+                        cycleFaces(FaceOrSlice.F, FaceOrSlice.R, FaceOrSlice.B, FaceOrSlice.L);
                         break;
 
                     case Move.UPrime:
                     case Move.D:
-                        {
-                            var tmp = Colors[(int)FrostBlade.FaceOrSlice.F];
-                            Colors[(int)FrostBlade.FaceOrSlice.F] = Colors[(int)FrostBlade.FaceOrSlice.L];
-                            Colors[(int)FrostBlade.FaceOrSlice.L] = Colors[(int)FrostBlade.FaceOrSlice.B];
-                            Colors[(int)FrostBlade.FaceOrSlice.B] = Colors[(int)FrostBlade.FaceOrSlice.R];
-                            Colors[(int)FrostBlade.FaceOrSlice.R] = tmp;
-                        }
+                        cycleFaces(FaceOrSlice.F, FaceOrSlice.L, FaceOrSlice.B, FaceOrSlice.R);
                         break;
 
                     case Move.U2:
                     case Move.D2:
-                        {
-                            var tmp = Colors[(int)FrostBlade.FaceOrSlice.F];
-                            Colors[(int)FrostBlade.FaceOrSlice.F] = Colors[(int)FrostBlade.FaceOrSlice.B];
-                            Colors[(int)FrostBlade.FaceOrSlice.B] = tmp;
-                            tmp = Colors[(int)FrostBlade.FaceOrSlice.L];
-                            Colors[(int)FrostBlade.FaceOrSlice.L] = Colors[(int)FrostBlade.FaceOrSlice.R];
-                            Colors[(int)FrostBlade.FaceOrSlice.R] = tmp;
-                        }
+                        cycleFaces(FaceOrSlice.F, FaceOrSlice.B);
+                        cycleFaces(FaceOrSlice.L, FaceOrSlice.R);
                         break;
 
                     case Move.L:
                     case Move.RPrime:
-                        {
-                            var tmp = Colors[(int)FrostBlade.FaceOrSlice.F];
-                            Colors[(int)FrostBlade.FaceOrSlice.F] = Colors[(int)FrostBlade.FaceOrSlice.U];
-                            Colors[(int)FrostBlade.FaceOrSlice.U] = Colors[(int)FrostBlade.FaceOrSlice.B];
-                            Colors[(int)FrostBlade.FaceOrSlice.B] = Colors[(int)FrostBlade.FaceOrSlice.D];
-                            Colors[(int)FrostBlade.FaceOrSlice.D] = tmp;
-                        }
+                        cycleFaces(FaceOrSlice.F, FaceOrSlice.U, FaceOrSlice.B, FaceOrSlice.D);
                         break;
 
                     case Move.LPrime:
                     case Move.R:
-                        {
-                            var tmp = Colors[(int)FrostBlade.FaceOrSlice.F];
-                            Colors[(int)FrostBlade.FaceOrSlice.F] = Colors[(int)FrostBlade.FaceOrSlice.D];
-                            Colors[(int)FrostBlade.FaceOrSlice.D] = Colors[(int)FrostBlade.FaceOrSlice.B];
-                            Colors[(int)FrostBlade.FaceOrSlice.B] = Colors[(int)FrostBlade.FaceOrSlice.U];
-                            Colors[(int)FrostBlade.FaceOrSlice.U] = tmp;
-                        }
+                        cycleFaces(FaceOrSlice.F, FaceOrSlice.D, FaceOrSlice.B, FaceOrSlice.U);
                         break;
 
                     case Move.L2:
                     case Move.R2:
-                        {
-                            var tmp = Colors[(int)FrostBlade.FaceOrSlice.U];
-                            Colors[(int)FrostBlade.FaceOrSlice.U] = Colors[(int)FrostBlade.FaceOrSlice.D];
-                            Colors[(int)FrostBlade.FaceOrSlice.D] = tmp;
-                            tmp = Colors[(int)FrostBlade.FaceOrSlice.F];
-                            Colors[(int)FrostBlade.FaceOrSlice.F] = Colors[(int)FrostBlade.FaceOrSlice.B];
-                            Colors[(int)FrostBlade.FaceOrSlice.B] = tmp;
-                        }
+                        cycleFaces(FaceOrSlice.U, FaceOrSlice.D);
+                        cycleFaces(FaceOrSlice.F, FaceOrSlice.B);
                         break;
 
                     case Move.F:
                     case Move.BPrime:
-                        {
-                            var tmp = Colors[(int)FrostBlade.FaceOrSlice.U];
-                            Colors[(int)FrostBlade.FaceOrSlice.U] = Colors[(int)FrostBlade.FaceOrSlice.L];
-                            Colors[(int)FrostBlade.FaceOrSlice.L] = Colors[(int)FrostBlade.FaceOrSlice.D];
-                            Colors[(int)FrostBlade.FaceOrSlice.D] = Colors[(int)FrostBlade.FaceOrSlice.R];
-                            Colors[(int)FrostBlade.FaceOrSlice.R] = tmp;
-                        }
+                        cycleFaces(FaceOrSlice.U, FaceOrSlice.L, FaceOrSlice.D, FaceOrSlice.R);
                         break;
 
                     case Move.FPrime:
                     case Move.B:
-                        {
-                            var tmp = Colors[(int)FrostBlade.FaceOrSlice.U];
-                            Colors[(int)FrostBlade.FaceOrSlice.U] = Colors[(int)FrostBlade.FaceOrSlice.R];
-                            Colors[(int)FrostBlade.FaceOrSlice.R] = Colors[(int)FrostBlade.FaceOrSlice.D];
-                            Colors[(int)FrostBlade.FaceOrSlice.D] = Colors[(int)FrostBlade.FaceOrSlice.L];
-                            Colors[(int)FrostBlade.FaceOrSlice.L] = tmp;
-                        }
+                        cycleFaces(FaceOrSlice.U, FaceOrSlice.R, FaceOrSlice.D, FaceOrSlice.L);
                         break;
 
                     case Move.F2:
                     case Move.B2:
-                        {
-                            var tmp = Colors[(int)FrostBlade.FaceOrSlice.U];
-                            Colors[(int)FrostBlade.FaceOrSlice.U] = Colors[(int)FrostBlade.FaceOrSlice.D];
-                            Colors[(int)FrostBlade.FaceOrSlice.D] = tmp;
-                            tmp = Colors[(int)FrostBlade.FaceOrSlice.L];
-                            Colors[(int)FrostBlade.FaceOrSlice.L] = Colors[(int)FrostBlade.FaceOrSlice.R];
-                            Colors[(int)FrostBlade.FaceOrSlice.R] = tmp;
-                        }
+                        cycleFaces(FaceOrSlice.U, FaceOrSlice.D);
+                        cycleFaces(FaceOrSlice.L, FaceOrSlice.R);
                         break;
 
                     default:
                         throw new NotImplementedException();
                 }
+            }
+
+            void cycleFaces(params FaceOrSlice[] faces)
+            {
+                if (faces.Length < 2)
+                    throw new ArgumentException("Must specify at least two faces.", "faces");
+                var tmp = Colors[(int)faces[0]];
+                for (int i = 0; i < faces.Length - 1; i++)
+                    Colors[(int)faces[i]] = Colors[(int)faces[i + 1]];
+                Colors[(int)faces[faces.Length - 1]] = tmp;
             }
         }
 
@@ -188,61 +144,32 @@ namespace Hypercube
                 switch (MoveHelpers.GetMoveType(move))
                 {
                     case MoveType.Clockwise:
-                        {
-                            // Edges
-                            var tmp = _cube._pieces[(int)PieceIndices[1]];
-                            _cube._pieces[(int)PieceIndices[1]] = _cube._pieces[(int)PieceIndices[3]];
-                            _cube._pieces[(int)PieceIndices[3]] = _cube._pieces[(int)PieceIndices[7]];
-                            _cube._pieces[(int)PieceIndices[7]] = _cube._pieces[(int)PieceIndices[5]];
-                            _cube._pieces[(int)PieceIndices[5]] = tmp;
-
-                            // Corners
-                            tmp = _cube._pieces[(int)PieceIndices[0]];
-                            _cube._pieces[(int)PieceIndices[0]] = _cube._pieces[(int)PieceIndices[6]];
-                            _cube._pieces[(int)PieceIndices[6]] = _cube._pieces[(int)PieceIndices[8]];
-                            _cube._pieces[(int)PieceIndices[8]] = _cube._pieces[(int)PieceIndices[2]];
-                            _cube._pieces[(int)PieceIndices[2]] = tmp;
-                        }
+                        cyclePieces(1, 3, 7, 5);
+                        cyclePieces(0, 6, 8, 2);
                         break;
 
                     case MoveType.CounterClockwise:
-                        {
-                            // Edges
-                            var tmp = _cube._pieces[(int)PieceIndices[1]];
-                            _cube._pieces[(int)PieceIndices[1]] = _cube._pieces[(int)PieceIndices[5]];
-                            _cube._pieces[(int)PieceIndices[5]] = _cube._pieces[(int)PieceIndices[7]];
-                            _cube._pieces[(int)PieceIndices[7]] = _cube._pieces[(int)PieceIndices[3]];
-                            _cube._pieces[(int)PieceIndices[3]] = tmp;
-
-                            // Corners
-                            tmp = _cube._pieces[(int)PieceIndices[0]];
-                            _cube._pieces[(int)PieceIndices[0]] = _cube._pieces[(int)PieceIndices[2]];
-                            _cube._pieces[(int)PieceIndices[2]] = _cube._pieces[(int)PieceIndices[8]];
-                            _cube._pieces[(int)PieceIndices[8]] = _cube._pieces[(int)PieceIndices[6]];
-                            _cube._pieces[(int)PieceIndices[6]] = tmp;
-                        }
+                        cyclePieces(1, 5, 7, 3);
+                        cyclePieces(0, 2, 8, 6);
                         break;
 
                     case MoveType.Double:
-                        {
-                            // Edges
-                            var tmp = _cube._pieces[(int)PieceIndices[1]];
-                            _cube._pieces[(int)PieceIndices[1]] = _cube._pieces[(int)PieceIndices[7]];
-                            _cube._pieces[(int)PieceIndices[7]] = tmp;
-                            tmp = _cube._pieces[(int)PieceIndices[3]];
-                            _cube._pieces[(int)PieceIndices[3]] = _cube._pieces[(int)PieceIndices[5]];
-                            _cube._pieces[(int)PieceIndices[5]] = tmp;
-
-                            // Corners
-                            tmp = _cube._pieces[(int)PieceIndices[0]];
-                            _cube._pieces[(int)PieceIndices[0]] = _cube._pieces[(int)PieceIndices[8]];
-                            _cube._pieces[(int)PieceIndices[8]] = tmp;
-                            tmp = _cube._pieces[(int)PieceIndices[2]];
-                            _cube._pieces[(int)PieceIndices[2]] = _cube._pieces[(int)PieceIndices[6]];
-                            _cube._pieces[(int)PieceIndices[6]] = tmp;
-                        }
+                        cyclePieces(1, 7);
+                        cyclePieces(3, 5);
+                        cyclePieces(0, 8);
+                        cyclePieces(2, 6);
                         break;
                 }
+            }
+
+            void cyclePieces(params int[] pieces)
+            {
+                if (pieces.Length < 2)
+                    throw new ArgumentException("Must specify at least two pieces.", "pieces");
+                var tmp = _cube._pieces[(int)PieceIndices[pieces[0]]];
+                for (int i = 0; i < pieces.Length - 1; i++)
+                    _cube._pieces[(int)PieceIndices[pieces[i]]] = _cube._pieces[(int)PieceIndices[pieces[i + 1]]];
+                _cube._pieces[(int)PieceIndices[pieces[pieces.Length - 1]]] = tmp;
             }
         }
 
