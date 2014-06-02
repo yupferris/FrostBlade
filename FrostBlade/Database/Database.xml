@@ -5,7 +5,7 @@
     <Algorithm Type="Oll" Name="57" ImageFileName="oll57.gif" Moves="(R U R' U') (M' U R U') Rw'" Comments="There's nothing too fancy here. The finger tricks used are pretty common. I do the slice turn as M' now because I think it's a little faster that way." />
     <Algorithm Type="Oll" Name="20" ImageFileName="oll20.gif" Moves="Rw' (R U) (R U R' U' Rw2) (R2' U) (R U') Rw'" Comments="Here, I use the slice as (Rw' R) because it flows a little nicer. This is the least common OLL case (1/216). The finger tricks here are pretty simple." />
     <Algorithm Type="Oll" Name="23" ImageFileName="oll23.gif" Moves="(R2' D) (R' U2) (R D') (R' U2 R')" Comments="This is one of the most awkward OLLs with all correctly flipped edges. It's still pretty fast, though." />
-    <Algorithm Type="Oll" Name="24" ImageFileName="oll24.gif" Moves="(Lw' U') (L U) (R U') (Rw' F)" Comments="This one is pretty fast. The only problem is that you have to alternate hands a couple times. I recommend being able to do the mirror of this case as well." />
+    <Algorithm Type="Oll" Name="24" ImageFileName="oll24.gif" Moves="(Rw U) (R' U') (Rw' F) (R F')" Comments="Custom." />
     <Algorithm Type="Oll" Name="25" ImageFileName="oll25.gif" Moves="F' (Rw U R' U') (Rw' F R)" Comments="Custom. Super fast." />
     <Algorithm Type="Oll" Name="27" ImageFileName="oll27.gif" Moves="(R U R' U) (R U2 R')" Comments="This is the Sune. Your right hand should never come off of the cube during the execution at any time." />
     <Algorithm Type="Oll" Name="26" ImageFileName="oll26.gif" Moves="(R U2) (R' U' R U' R')" Comments="This is just the inverse of the Sune, called the Antisune." />
